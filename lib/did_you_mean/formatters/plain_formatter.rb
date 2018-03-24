@@ -2,8 +2,8 @@
 
 module DidYouMean
   class PlainFormatter
-    def message_for(corrections)
-      corrections.empty? ? "" : "\nDid you mean?  #{corrections.join("\n               ")}"
+    def message_for(suggestions)
+      suggestions.empty? ? "" : "\nDid you mean?  #{suggestions.join("\n               ")}"
     end
   end
 end

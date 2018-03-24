@@ -169,7 +169,7 @@ _<sup>released at 2015-08-21 06:44:11 UTC</sup>_
 
 - Support for JRuby 9.0.0.0
 - Prefix-based correction ( [@tjohn](https://github.com/tjohn), [#50](https://github.com/yuki24/did_you_mean/issues/50 "Match start of method name"), [#49](https://github.com/yuki24/did_you_mean/issues/49 "Use Jaro distance instead of Jaro-Winkler distance"))
-- Correction search is about 75% faster than 0.9.10
+- Suggestion search is about 75% faster than 0.9.10
 
 #### Breaking Changes
 

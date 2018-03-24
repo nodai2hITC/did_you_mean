@@ -7,7 +7,7 @@ class ExperimentalMethodNameCorrectionTest < Minitest::Test
     error = assert_raises(NoMethodError) { @nubmer.zero? }
     remove_instance_variable :@nubmer
 
-    assert_correction :@number, error.corrections
+    assert_suggestion :@number, error.suggestions
     assert_match "Did you mean?  @number", error.to_s
   end
 end

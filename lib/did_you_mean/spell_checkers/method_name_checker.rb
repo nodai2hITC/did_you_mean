@@ -13,8 +13,8 @@ module DidYouMean
       @private_call = exception.respond_to?(:private_call?) ? exception.private_call? : false
     end
 
-    def corrections
-      @corrections ||= SpellChecker.new(dictionary: method_names).correct(method_name) - NAMES_TO_EXCLUDE[@receiver.class]
+    def suggestions
+      @suggestions ||= SpellChecker.new(dictionary: method_names).correct(method_name) - NAMES_TO_EXCLUDE[@receiver.class]
     end
 
     def method_names

@@ -1,6 +1,6 @@
 module DidYouMean
   class NullChecker
     def initialize(*);  end
-    def corrections; [] end
+    def suggestions; [] end
   end
 end

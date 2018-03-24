@@ -35,52 +35,52 @@ class MethodNameCheckTest < Minitest::Test
     @user = User.new.extend(UserModule)
   end
 
-  def test_corrections_include_instance_method
+  def test_suggestions_include_instance_method
     error = assert_raises(NoMethodError){ @user.flrst_name }
 
-    assert_correction :first_name, error.corrections
+    assert_suggestion :first_name, error.suggestions
     assert_match "Did you mean?  first_name",  error.to_s
   end
 
-  def test_corrections_include_private_method
+  def test_suggestions_include_private_method
     error = assert_raises(NoMethodError){ @user.friend }
 
-    assert_correction :friends, error.corrections
+    assert_suggestion :friends, error.suggestions
     assert_match "Did you mean?  friends", error.to_s
   end
 
-  def test_corrections_include_method_from_module
+  def test_suggestions_include_method_from_module
     error = assert_raises(NoMethodError){ @user.fr0m_module }
 
-    assert_correction :from_module, error.corrections
+    assert_suggestion :from_module, error.suggestions
     assert_match "Did you mean?  from_module", error.to_s
   end
 
-  def test_corrections_include_class_method
+  def test_suggestions_include_class_method
     error = assert_raises(NoMethodError){ User.l0ad }
 
-    assert_correction :load, error.corrections
+    assert_suggestion :load, error.suggestions
     assert_match "Did you mean?  load", error.to_s
   end
 
   def test_private_methods_should_not_be_suggested
     error = assert_raises(NoMethodError){ User.new.the_protected_method }
-    refute_includes error.corrections, :the_protected_method
+    refute_includes error.suggestions, :the_protected_method
 
     error = assert_raises(NoMethodError){ User.new.the_private_method }
-    refute_includes error.corrections, :the_private_method
+    refute_includes error.suggestions, :the_private_method
   end
 
-  def test_corrections_when_private_method_is_called_with_args
+  def test_suggestions_when_private_method_is_called_with_args
     error = assert_raises(NoMethodError){ @user.call_incorrect_private_method }
 
-    assert_correction :raise, error.corrections
+    assert_suggestion :raise, error.suggestions
     assert_match "Did you mean?  raise", error.to_s
   end
 
   def test_exclude_methods_on_nil
     error = assert_raises(NoMethodError){ nil.map }
-    assert_empty error.corrections
+    assert_empty error.suggestions
   end
 
   def test_does_not_exclude_custom_methods_on_nil
@@ -88,7 +88,7 @@ class MethodNameCheckTest < Minitest::Test
     end
 
     error = assert_raises(NoMethodError){ nil.empty }
-    assert_correction :empty?, error.corrections
+    assert_suggestion :empty?, error.suggestions
   ensure
     NilClass.class_eval { undef empty? }
   end
